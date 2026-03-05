@@ -1,4 +1,4 @@
-// app/(frontend)/art/page.tsx
+"use client";
 import Link from "next/link";
 
 // Dữ liệu mẫu cho trang Art (Video Piano, Hình ảnh nghệ thuật...)
@@ -53,7 +53,7 @@ export default function ArtPage() {
                         <div className="absolute inset-0 bg-secondary group-hover:scale-105 transition-transform duration-500"></div>
 
                         {/* Lớp phủ gradient để text dễ đọc */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
 
                         {/* Icon Play nếu là Video */}
                         {item.type === "video" && (
