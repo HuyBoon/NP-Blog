@@ -7,8 +7,7 @@ export default function Header() {
                 href="/"
                 className="flex items-center gap-2 text-accent text-3xl font-bold transition-transform hover:scale-105"
             >
-                <span>🗡️</span>
-                <h1>NP - BLOG</h1>
+                <h1>PiN - BLOG</h1>
             </Link>
 
             <div className="flex gap-6 text-accent text-2xl">
