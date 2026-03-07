@@ -47,7 +47,7 @@ export const authConfig = {
                     return Response.redirect(loginUrl);
                 }
 
-                if (role !== "admin" && role !== "superAdmin") {
+                if (role !== "admin") {
                     const unauthorizedUrl = nextUrl.clone();
                     unauthorizedUrl.pathname = "/unauthorized";
                     return Response.redirect(unauthorizedUrl);
@@ -58,10 +58,10 @@ export const authConfig = {
             if (isAuthRoute && isLoggedIn) {
                 const redirectUrl = nextUrl.clone();
 
-                if (role === "admin" || role === "superAdmin") {
+                if (role === "admin") {
                     redirectUrl.pathname = "/admin";
                 } else {
-                    redirectUrl.pathname = "/dashboard";
+                    redirectUrl.pathname = "/";
                 }
                 return Response.redirect(redirectUrl);
             }

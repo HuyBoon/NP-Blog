@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import connectDB from "@/lib/db";
@@ -35,10 +34,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
                         user.password,
                     );
                     if (!passwordsMatch) return null;
-
-                    if (user.isActive === false) {
-                        throw new Error("ACCOUNT_LOCKED");
-                    }
 
                     try {
                         await User.findByIdAndUpdate(user._id, {

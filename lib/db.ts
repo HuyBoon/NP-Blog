@@ -24,6 +24,7 @@ if (!cached) {
 }
 
 async function connectDB() {
+    // Nếu đã có kết nối rồi thì dùng luôn, không log thêm để tránh spam terminal
     if (cached.conn) {
         return cached.conn;
     }
@@ -36,6 +37,8 @@ async function connectDB() {
         cached.promise = mongoose
             .connect(MONGODB_URI!, opts)
             .then((mongoose) => {
+                // Log thành công ở đây để chỉ hiển thị 1 lần khi thực sự tạo kết nối mới
+                console.log(" MongoDB connected successfully to PiN-Blog!");
                 return mongoose;
             });
     }
@@ -44,6 +47,7 @@ async function connectDB() {
         cached.conn = await cached.promise;
     } catch (e) {
         cached.promise = null;
+        console.error("MongoDB connection error:", e);
         throw e;
     }
 

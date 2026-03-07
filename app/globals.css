@@ -136,6 +136,9 @@
         @apply font-mono font-bold tracking-tight;
     }
 }
+
+
+
 @keyframes shineEffect {
     0% {
         height: 0%;
