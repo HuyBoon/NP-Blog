@@ -1,47 +1,48 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
 :root {
     /* Nền chính tối hơn primary một chút để tạo chiều sâu */
     --background: #0d1617;
     --background-editor: #172627;
-    --foreground: #ffffff; /* Text màu trắng theo yêu cầu */
+    --foreground: #ffffff; /* Text chính màu trắng */
 
-    /* Các thành phần nổi (Card, Modal, Popover) dùng màu primary */
+    /* Các thành phần nổi (Card, Modal, Popover) dùng màu primary (Xanh đậm) */
     --card: #172627;
     --card-foreground: #ffffff;
 
     --popover: #172627;
     --popover-foreground: #ffffff;
 
-    --primary: #172627; /* Màu primary yêu cầu */
+    --primary: #172627; /* Xanh đậm */
     --primary-foreground: #ffffff;
 
-    --secondary: #243b3d; /* Màu phụ sáng hơn primary một chút */
+    --secondary: #243b3d; /* Xanh sáng hơn primary một chút để làm nền phụ */
     --secondary-foreground: #ffffff;
 
     --muted: #1e3233;
     --muted-foreground: #a1b3b4; /* Text xám nhạt cho các thành phần bị mờ */
 
-    --accent: #d0a933; /* Màu vàng nhấn yêu cầu */
-    --accent-foreground: #000000; /* Text đen trên nền vàng để dễ đọc */
+    --accent: #d0a933; /* Màu vàng nhấn */
+    --accent-foreground: #000000; /* Text đen trên nền vàng để có độ tương phản tuyệt đối */
 
-    --destructive: #ef4444;
-    --destructive-foreground: #ffffff;
+    --destructive: #ef4444; /* Màu đỏ cho các hành động xóa/cảnh báo */
+    --destructive-foreground: #ffffff; /* Text trắng trên nền đỏ */
 
-    --border: #2a4547; /* Viền sáng hơn màu nền */
+    --border: #2a4547; /* Viền xanh sáng nhẹ */
     --input: #2a4547;
     --ring: #d0a933; /* Hiệu ứng focus (ring) dùng màu vàng nhấn */
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
-    /* Điều chỉnh lại màu Chart sao cho hợp với theme tối & màu vàng */
-    --chart-1: #d0a933;
-    --chart-2: #2a9d8f;
-    --chart-3: #e76e50;
-    --chart-4: #f4a261;
-    --chart-5: #e9c46a;
+    /* Điều chỉnh lại màu Chart lấy Vàng và Đỏ làm chủ đạo */
+    --chart-1: #d0a933; /* Vàng */
+    --chart-2: #ef4444; /* Đỏ */
+    --chart-3: #2a9d8f; /* Xanh ngọc */
+    --chart-4: #f4a261; /* Cam */
+    --chart-5: #e9c46a; /* Vàng nhạt */
 
-    /* Sidebar đồng bộ với tông màu chung */
+    /* Sidebar đồng bộ với hệ màu (Xanh đậm - Vàng) */
     --sidebar: #172627;
     --sidebar-foreground: #ffffff;
     --sidebar-primary: #d0a933;
@@ -51,7 +52,7 @@
     --sidebar-border: #2a4547;
     --sidebar-ring: #d0a933;
 
-    /* Cấu hình cho CKEditor phù hợp với Dark mode */
+    /* Cấu hình CKEditor */
     --ck-color-base-background: var(--background);
     --ck-color-base-border: var(--border);
     --ck-color-text: var(--foreground);
@@ -101,9 +102,14 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
 
+    /* Border Radius mở rộng */
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
+    --radius-xl: calc(var(--radius) + 4px);
+    --radius-2xl: calc(var(--radius) + 8px);
+    --radius-3xl: calc(var(--radius) + 12px);
+    --radius-4xl: calc(var(--radius) + 16px);
 }
 
 @layer base {
@@ -131,11 +137,7 @@
     }
 }
 
-body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: Arial, Helvetica, sans-serif;
-}
+
 
 @keyframes shineEffect {
     0% {
