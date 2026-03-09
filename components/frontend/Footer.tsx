@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, MapPin, Facebook } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
     return (
@@ -9,10 +10,18 @@ export default function Footer() {
                 <div className="space-y-4">
                     <Link
                         href="/"
-                        className="flex items-center gap-2 text-accent text-3xl font-bold transition-transform hover:scale-105"
+                        className="flex items-center gap-2 transition-transform hover:scale-105 relative z-50"
                     >
-                        <span>🗡️</span>
-                        <span>PiN-Blog</span>
+                        <Image
+                            src="/logo-main.png"
+                            alt="PiN-Blog Logo"
+                            // Cung cấp kích thước gốc theo tỷ lệ 2:1 (ví dụ: 120x60)
+                            width={200}
+                            height={100}
+                            // h-10 cho mobile, md:h-12 cho desktop, w-auto để tự động co giãn theo chiều cao
+                            className="object-contain  drop-shadow-md"
+                            priority
+                        />
                     </Link>
                     <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
                         Life is full of exciting experiences. Never stop, it is
