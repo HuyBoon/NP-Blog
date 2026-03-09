@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
+import { HOME_CARDS } from "@/constants";
 
 export default function HomePage() {
     return (
@@ -22,46 +24,26 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-primary/30 group-hover:bg-primary/10 transition-colors"></div>
             </div>
 
-            {/* Navigation Cards - Thêm pb-12 để phần bị đẩy xuống không bị cắt lẹm */}
+            {/* Navigation Cards */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 w-full mt-10 pb-12 items-start">
-                {/* Thẻ 1: Nằm bình thường */}
-                <NavCard
-                    href="/portfolio"
-                    title="All Of Work"
-                    className="transform md:translate-y-0"
-                />
+                {HOME_CARDS.map((card, index) => {
+                    // Logic tạo hiệu ứng so le: Các thẻ ở vị trí lẻ (1, 3) sẽ bị đẩy xuống
+                    const isOdd = index % 2 !== 0;
+                    const transformClass = isOdd
+                        ? "transform translate-y-8 md:translate-y-12"
+                        : "transform md:translate-y-0";
 
-                {/* Thẻ 2: Đẩy xuống (so le) */}
-                <NavCard
-                    href="/life"
-                    title="My Life"
-                    className="transform translate-y-8 md:translate-y-12"
-                />
-
-                {/* Thẻ 3: Nằm bình thường */}
-                <NavCard
-                    href="/art"
-                    title="ART"
-                    className="transform md:translate-y-0"
-                />
-
-                {/* Thẻ 4: Đẩy xuống (so le) */}
-                <NavCard
-                    href="#"
-                    title="Love"
-                    subtitle="Coming soon"
-                    disabled
-                    className="transform translate-y-8 md:translate-y-12"
-                />
-
-                {/* Thẻ 5: Nằm bình thường */}
-                <NavCard
-                    href="#"
-                    title="Shop"
-                    subtitle="Coming soon"
-                    disabled
-                    className="transform md:translate-y-0"
-                />
+                    return (
+                        <NavCard
+                            key={card.title}
+                            href={card.href}
+                            title={card.title}
+                            subtitle={card.subtitle}
+                            image={card.image}
+                            className={transformClass}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
@@ -71,32 +53,47 @@ function NavCard({
     href,
     title,
     subtitle,
+    image,
     disabled = false,
-    className = "", // Nhận thêm custom class từ bên ngoài
+    className = "",
 }: {
     href: string;
     title: string;
     subtitle?: string;
+    image: string;
     disabled?: boolean;
     className?: string;
 }) {
     return (
         <Link
             href={href}
-            /* Ghép className truyền vào để kích hoạt hiệu ứng so le */
-            className={`relative aspect-3/4 rounded-xl overflow-hidden border border-border group transition-all duration-300 hover:border-accent hover:shadow-[0_0_20px_rgba(208,169,51,0.15)] ${disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer"} ${className}`}
+            className={`relative aspect-2/3 rounded-xl overflow-hidden border border-border group transition-all duration-300 hover:border-accent hover:shadow-[0_0_20px_rgba(208,169,51,0.15)] ${
+                disabled ? "cursor-not-allowed opacity-70" : "cursor-pointer"
+            } ${className}`}
             onClick={(e) => disabled && e.preventDefault()}
         >
-            <div className="absolute inset-0 bg-secondary group-hover:scale-110 transition-transform duration-500"></div>
-            <div className="absolute inset-0 bg-black/40"></div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+            {/* Background Image Container */}
+            <div className="absolute inset-0 aspect-2/3 group-hover:scale-110 transition-transform duration-500">
+                <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    className="object-cover opacity-70 "
+                    sizes="(max-width: 768px) 50vw, 20vw"
+                />
+            </div>
+
+            {/* Lớp phủ làm tối ảnh để chữ nổi bật hơn */}
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"></div>
+
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center z-10">
                 {subtitle && (
-                    <span className="text-xs font-semibold mb-2 text-white">
+                    <span className="text-xs font-semibold mb-2 text-white drop-shadow-md">
                         {subtitle}
                     </span>
                 )}
-                <div className="border-2 border-dashed border-accent p-2 rounded-md">
-                    <span className="font-bold text-lg text-accent group-hover:text-white transition-colors">
+                <div className="border-2 border-dashed border-accent p-2 rounded-md backdrop-blur-sm bg-black/20">
+                    <span className="font-bold text-lg text-accent group-hover:text-white transition-colors drop-shadow-md">
                         {title}
                     </span>
                 </div>

@@ -2,70 +2,69 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, Menu, X } from "lucide-react";
+import { NAV_LINKS, CONTACT_INFO } from "@/constants";
 
 export default function Header() {
-    // Quản lý trạng thái đóng/mở của Mobile Menu
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    // Hàm đổi trạng thái (Toggle)
     const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Hàm đóng menu khi click vào 1 link
     const closeMenu = () => setIsMobileMenuOpen(false);
 
     return (
         <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border/40 transition-all duration-300">
-            <div className="max-w-6xl mx-auto flex justify-between items-center p-4 md:px-6 md:py-4">
-                {/* Logo */}
+            <div className="max-w-6xl mx-auto flex justify-between items-center px-2 md:px-6 ">
+                {/* Logo Area */}
                 <Link
                     href="/"
-                    className="flex items-center gap-1.5 text-2xl md:text-3xl font-extrabold tracking-tight transition-transform hover:scale-105 relative z-50"
+                    className="flex items-center gap-2 transition-transform hover:scale-105 relative z-50"
                     onClick={closeMenu}
                 >
-                    <span className="text-white">PiN</span>
-                    <span className="text-accent">- BLOG</span>
+                    <Image
+                        src="/logo-main.png"
+                        alt="PiN-Blog Logo"
+                        // Cung cấp kích thước gốc theo tỷ lệ 2:1 (ví dụ: 120x60)
+                        width={120}
+                        height={60}
+                        // h-10 cho mobile, md:h-12 cho desktop, w-auto để tự động co giãn theo chiều cao
+                        className="object-contain h-14 w-auto md:h-18 drop-shadow-md"
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-8 text-sm font-bold text-muted-foreground">
-                    <Link
-                        href="/portfolio"
-                        className="hover:text-accent transition-colors duration-300"
-                    >
-                        Portfolio
-                    </Link>
-                    <Link
-                        href="/life"
-                        className="hover:text-accent transition-colors duration-300"
-                    >
-                        Life
-                    </Link>
-                    <Link
-                        href="/art"
-                        className="hover:text-accent transition-colors duration-300"
-                    >
-                        Art
-                    </Link>
+                    {NAV_LINKS.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="hover:text-accent transition-colors duration-300"
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
                 </nav>
 
                 {/* Right Side: Icons & CTA */}
                 <div className="flex items-center gap-5 relative z-50">
                     <div className="hidden sm:flex items-center gap-5 text-muted-foreground">
                         <a
-                            href="mailto:hello@pinblog.com"
+                            href={`mailto:${CONTACT_INFO.email}`}
                             className="hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
+                            title="Gửi Email"
                         >
                             <Mail size={20} />
                         </a>
                         <div
                             className="flex items-center cursor-help hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
-                            title="Hồ Chí Minh, Việt Nam"
+                            title={CONTACT_INFO.location}
                         >
                             <MapPin size={20} />
                         </div>
                     </div>
 
-                    {/* Nút Hamburger cho Mobile (Có đổi icon) */}
+                    {/* Nút Hamburger cho Mobile */}
                     <button
                         onClick={toggleMenu}
                         className="md:hidden p-1 text-accent hover:text-white transition-colors"
@@ -80,8 +79,7 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Mobile Navigation Dropdown (Màn che sổ xuống) */}
-            {/* Dùng transition để hiệu ứng trượt mượt mà */}
+            {/* Mobile Navigation Dropdown */}
             <div
                 className={`md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-xl border-b border-border/40 overflow-hidden transition-all duration-300 ease-in-out ${
                     isMobileMenuOpen
@@ -90,48 +88,33 @@ export default function Header() {
                 }`}
             >
                 <nav className="flex flex-col items-center gap-6">
-                    <Link
-                        href="/portfolio"
-                        onClick={closeMenu}
-                        className="text-lg font-bold text-white hover:text-accent transition-colors"
-                    >
-                        Portfolio
-                    </Link>
-                    <Link
-                        href="/life"
-                        onClick={closeMenu}
-                        className="text-lg font-bold text-white hover:text-accent transition-colors"
-                    >
-                        Life
-                    </Link>
-                    <Link
-                        href="/art"
-                        onClick={closeMenu}
-                        className="text-lg font-bold text-white hover:text-accent transition-colors"
-                    >
-                        Art
-                    </Link>
+                    {/* Render tự động Links cho Mobile */}
+                    {NAV_LINKS.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={closeMenu}
+                            className="text-lg font-bold text-white hover:text-accent transition-colors"
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
 
-                    {/* Show Admin button & contacts in mobile menu too */}
+                    {/* Show contacts in mobile menu */}
                     <div className="flex gap-6 mt-2 text-muted-foreground sm:hidden">
                         <a
-                            href="mailto:hello@pinblog.com"
+                            href={`mailto:${CONTACT_INFO.email}`}
                             className="hover:text-accent transition-colors"
                         >
                             <Mail size={20} />
                         </a>
-                        <div className="flex items-center hover:text-accent transition-colors">
+                        <div
+                            className="flex items-center hover:text-accent transition-colors"
+                            title={CONTACT_INFO.location}
+                        >
                             <MapPin size={20} />
                         </div>
                     </div>
-
-                    <Link
-                        href="/login"
-                        onClick={closeMenu}
-                        className="mt-2 px-8 py-2.5 text-xs font-bold uppercase tracking-wider bg-accent text-accent-foreground rounded-full hover:bg-accent/80 transition-all duration-300"
-                    >
-                        Vào Admin
-                    </Link>
                 </nav>
             </div>
         </header>
