@@ -1,65 +1,107 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const projectsData = [
+const experienceData = [
     {
         id: 1,
-        title: "Tân Kiến Trúc",
-        role: "Frontend Developer",
-        techStack: ["Next.js", "Tailwind CSS", "TypeScript"],
+        slug: "mobifone",
+        company: "MOBIFONE",
+        role: "Operation Engineer",
         description:
-            "Website giới thiệu và trưng bày các dự án cho công ty kiến trúc.",
-        link: "#",
-        imagePlaceholder: "TKT",
+            "Speed, Professionalism, Efficiency Innovation. Continuously innovating and creating a strong and complete digital ecosystem, elevating the lives of Vietnamese people.",
+        image: "/experience/mobifone.png",
+        imagePlaceholder: "MBF",
     },
     {
         id: 2,
-        title: "Amazing Phu Quoc",
-        role: "Fullstack Developer",
-        techStack: ["React", "Node.js", "MongoDB"],
-        description: "Nền tảng đặt tour du lịch và khách sạn tại Phú Quốc.",
-        link: "#",
-        imagePlaceholder: "APQ",
+        slug: "a-chau-aieet",
+        company: "A CHAU (AIEET)",
+        role: "Operation Technician",
+        description:
+            "Fast and Efficient. BTS installation and maintenance. Survey and technical services. Construction and repair of BTS base station infrastructure.",
+        image: "/experience/achau.png",
+        imagePlaceholder: "AIEET",
     },
     {
         id: 3,
-        title: "Varia Hotel",
-        role: "Fullstack Developer",
-        techStack: ["Next.js", "NestJS", "TypeORM"],
-        description: "Hệ thống quản lý và đặt phòng khách sạn toàn diện.",
-        link: "#",
-        imagePlaceholder: "VH",
+        slug: "mobitech",
+        company: "MOBITECH",
+        role: "Systems Design Engineer",
+        description:
+            "Young, dynamic, creative, and efficient. A dynamic business operating in the fields of electronics, telecommunications, and information technology.",
+        image: "/experience/mobitech.png",
+        imagePlaceholder: "MBT",
     },
     {
         id: 4,
-        title: "JobTrack",
-        role: "Personal Project",
-        techStack: ["Next.js", "Supabase", "Tailwind CSS"],
+        slug: "vietjet-air",
+        company: "VIETJET AIR",
+        role: "Supply Engineer",
         description:
-            "Công cụ quản lý và theo dõi quá trình ứng tuyển công việc.",
-        link: "#",
-        imagePlaceholder: "JT",
+            "Fly Into Your Future With Vietjet. In a friendly, transparent, respectful working environment with colleagues and a team of experienced and thoughtful leaders.",
+        image: "/experience/vietjet.png",
+        imagePlaceholder: "VJA",
+    },
+    {
+        id: 5,
+        slug: "thinh-phong",
+        company: "THINH PHONG",
+        role: "Machanical Engineer",
+        description:
+            "Responsibility and honesty. Improving working conditions and environmental hygiene in industrial and urban areas, ensuring hygiene and health requirements for people.",
+        image: "/experience/thinhphong.png",
+        imagePlaceholder: "TP",
+    },
+    {
+        id: 6,
+        slug: "jetstar-airways",
+        company: "JETSTAR AIRWAYS",
+        role: "Intership Planning Engineer",
+        description:
+            "Jetstar make the world more accessible by delivering low fares, fun travel and great value.",
+        image: "/experience/jetstar.png",
+        imagePlaceholder: "JSA",
     },
 ];
-
 const partners = ["MobiFone", "Vietjet Air", "FPT", "Viettel"];
-
 export default function PortfolioPage() {
     return (
-        <div className="w-full flex flex-col items-center gap-16 animate-fade-in">
-            {/* Hero Section của Portfolio */}
-            <section className="text-center space-y-6 max-w-2xl mt-8">
-                <h1 className="text-5xl font-extrabold text-white">
-                    All Of <span className="text-accent">Work</span>
-                </h1>
-                <p className="text-muted-foreground text-lg leading-relaxed">
-                    Hơn 2 năm kinh nghiệm chinh chiến với các dự án thực tế. Từ
-                    việc xây dựng giao diện người dùng mượt mà đến kiến trúc hệ
-                    thống backend ổn định.
+        <div className="w-full flex flex-col items-center animate-fade-in pb-20">
+            <h1 className="text-5xl font-extrabold text-white">
+                All Of <span className="text-accent">Work</span>
+            </h1>
+            {/* --- Hero Section --- */}
+            <section className="text-center space-y-6 max-w-4xl mt-12 mb-8 px-4">
+                <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-3xl mx-auto font-medium">
+                    I have seven years' experience working in various
+                    environments and have accumulated a wealth of knowledge and
+                    soft skills. I am currently seeking stability, where I can
+                    contribute my abilities to a suitable company and achieve
+                    greater success.
                 </p>
             </section>
 
-            {/* Đối tác / Các công ty (Marquee text hoặc Grid logo) */}
+            {/* --- Video / Quote Section --- */}
+            <div className="w-full max-w-4xl px-4 mb-12">
+                <div className="relative w-full aspect-21/9 md:aspect-3/1 bg-secondary rounded-lg overflow-hidden border border-border/50 flex items-center justify-center group cursor-pointer shadow-lg">
+                    {/* Ảnh nền tĩnh (Thay bằng ảnh cái bàn phím/cafe như trong hình) */}
+                    <Image
+                        src="/experience/quote-bg.png"
+                        alt="Quote Background"
+                        fill
+                        className="object-cover opacity-60 mix-blend-overlay group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-black/40"></div>
+
+                    {/* Dòng Quote */}
+                    <h3 className="relative z-10 text-center text-white font-medium text-sm md:text-lg max-w-2xl px-6 italic drop-shadow-md">
+                        "I view everything in life as exciting experiences,
+                        storing them in my mind, refining them into who I am,
+                        and carrying them with me as I conquer new heights."
+                    </h3>
+                </div>
+            </div>
+
             <section className="w-full border-y border-border py-8 overflow-hidden bg-secondary/30">
                 <div className="flex justify-center gap-12 md:gap-24 flex-wrap px-4">
                     {partners.map((partner, idx) => (
@@ -72,57 +114,55 @@ export default function PortfolioPage() {
                     ))}
                 </div>
             </section>
+            {/* --- Đường kẻ ngang chia cách kép (Gold Lines) --- */}
+            <div className="w-full h-[1px] bg-accent/30 mb-1"></div>
+            <div className="w-full h-[2px] bg-accent mb-12 shadow-[0_0_10px_rgba(208,169,51,0.5)]"></div>
 
-            {/* Grid Danh sách dự án */}
-            <section className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
-                {projectsData.map((project) => (
-                    <div
-                        key={project.id}
-                        className="group relative bg-card border border-border rounded-xl overflow-hidden hover:border-accent transition-all duration-300 shadow-lg hover:shadow-accent/20"
+            {/* --- Grid Danh sách Kinh nghiệm (2 cột) --- */}
+            <section className="w-full max-w-5xl px-4 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                {experienceData.map((item) => (
+                    <Link
+                        key={item.id}
+                        href={`/portfolio/${item.slug}`}
+                        className="group flex flex-col bg-transparent border border-border/60 hover:border-accent transition-all duration-300 hover:shadow-[0_0_15px_rgba(208,169,51,0.15)] cursor-pointer"
                     >
-                        {/* Ảnh cover dự án (Tạm thời dùng div màu, sau này thay bằng <Image /> của Next.js) */}
-                        <div className="w-full aspect-video bg-secondary flex items-center justify-center relative overflow-hidden">
-                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
-                            <span className="text-5xl font-black text-muted-foreground opacity-30 group-hover:scale-110 transition-transform duration-500">
-                                {project.imagePlaceholder}
-                            </span>
-                        </div>
-
-                        {/* Thông tin dự án */}
-                        <div className="p-6 space-y-4 relative z-20 bg-card">
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <h3 className="text-2xl font-bold text-white group-hover:text-accent transition-colors">
-                                        {project.title}
-                                    </h3>
-                                    <span className="text-sm font-medium text-accent">
-                                        {project.role}
-                                    </span>
-                                </div>
-                                <Link
-                                    href={project.link}
-                                    className="p-2 bg-secondary rounded-full text-white hover:bg-accent hover:text-black transition-colors"
-                                >
-                                    ↗
-                                </Link>
+                        {/* Khu vực Hình ảnh */}
+                        <div className="w-full aspect-[16/9] relative overflow-hidden bg-secondary border-b border-border/60">
+                            {/* Chữ placeholder hiển thị khi ảnh lỗi hoặc chưa có ảnh */}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-4xl font-black text-muted-foreground opacity-30 tracking-widest">
+                                    {item.imagePlaceholder}
+                                </span>
                             </div>
 
-                            <p className="text-muted-foreground line-clamp-2">
-                                {project.description}
+                            {/* Ảnh công ty/dự án */}
+                            <Image
+                                src={item.image}
+                                alt={item.company}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-700 relative z-10"
+                                // Thêm opacity-0 nếu chưa có ảnh thật để nó hiện cái placeholder bên trên
+                            />
+                        </div>
+
+                        {/* Nội dung thông tin dự án */}
+                        <div className="p-5 flex flex-col flex-1">
+                            {/* Tên công ty (Màu trắng) */}
+                            <h3 className="text-xl md:text-2xl font-bold text-white uppercase tracking-wide group-hover:text-accent transition-colors">
+                                {item.company}
+                            </h3>
+
+                            {/* Vị trí/Vai trò (Màu vàng theo mẫu) */}
+                            <h4 className="text-sm font-semibold text-accent mt-1 mb-3">
+                                {item.role}
+                            </h4>
+
+                            {/* Mô tả */}
+                            <p className="text-muted-foreground text-sm leading-relaxed flex-1">
+                                {item.description}
                             </p>
-
-                            <div className="flex flex-wrap gap-2 pt-2">
-                                {project.techStack.map((tech, i) => (
-                                    <span
-                                        key={i}
-                                        className="px-3 py-1 text-xs font-semibold bg-background border border-border rounded-full text-gray-300"
-                                    >
-                                        {tech}
-                                    </span>
-                                ))}
-                            </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </section>
         </div>
