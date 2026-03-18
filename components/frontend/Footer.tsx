@@ -1,35 +1,25 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, MapPin, Facebook } from "lucide-react";
-import Image from "next/image";
 
 export default function Footer() {
     return (
         <footer className="w-full border-t border-border bg-background pt-16 pb-8 mt-auto">
             <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-                {/* Cột 1: Brand & Giới thiệu ngắn */}
                 <div className="space-y-4">
                     <Link
                         href="/"
                         className="flex items-center gap-2 transition-transform hover:scale-105 relative z-50"
                     >
-                        <Image
-                            src="/logo-main.png"
-                            alt="PiN-Blog Logo"
-                            // Cung cấp kích thước gốc theo tỷ lệ 2:1 (ví dụ: 120x60)
-                            width={200}
-                            height={100}
-                            // h-10 cho mobile, md:h-12 cho desktop, w-auto để tự động co giãn theo chiều cao
-                            className="object-contain  drop-shadow-md"
-                            priority
-                        />
+                        <h2 className="text-3xl font-extrabold tracking-tight drop-shadow-md">
+                            <span className="text-white">PIN</span>
+                            <span className="text-accent">-BLOG</span>
+                        </h2>
                     </Link>
                     <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
                         Life is full of exciting experiences. Never stop, it is
                         me !!!
                     </p>
                 </div>
-
-                {/* Cột 2: Quick Links (Điều hướng nhanh) */}
                 <div className="space-y-4 md:pl-8">
                     <h3 className="text-lg font-bold text-white uppercase tracking-wider">
                         Khám phá
@@ -64,8 +54,6 @@ export default function Footer() {
                         </li>
                     </ul>
                 </div>
-
-                {/* Cột 3: Contact & Socials (Thông tin liên hệ) */}
                 <div className="space-y-4">
                     <h3 className="text-lg font-bold text-white uppercase tracking-wider">
                         Kết nối
@@ -86,7 +74,6 @@ export default function Footer() {
                         </li>
                     </ul>
 
-                    {/* Các nút mạng xã hội */}
                     <div className="flex gap-3 pt-2">
                         <a
                             href="#"
@@ -119,7 +106,6 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* Bottom Bar: Copyright */}
             <div className="max-w-6xl mx-auto px-6 mt-16 pt-8 border-t border-secondary flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-muted-foreground/60">
                 <p>
                     © {new Date().getFullYear()} PiN-Blog. All rights reserved.

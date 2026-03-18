@@ -3,19 +3,26 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Mail, MapPin, Menu, X } from "lucide-react";
 import { NAV_LINKS, CONTACT_INFO } from "@/constants";
+
+import { useLanguage } from "@/components/frontend/LanguageProvider";
 
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+    const pathname = usePathname();
+    const { lang, toggleLang } = useLanguage();
+
     const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
     const closeMenu = () => setIsMobileMenuOpen(false);
 
+    const isPortfolioPage = pathname === "/portfolio";
+
     return (
         <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border/40 transition-all duration-300">
-            <div className="max-w-6xl mx-auto flex justify-between items-center px-2 md:px-6 ">
-                {/* Logo Area */}
+            <div className="max-w-6xl mx-auto flex justify-between items-center px-2 md:px-6">
                 <Link
                     href="/"
                     className="flex items-center gap-2 transition-transform hover:scale-105 relative z-50"
@@ -24,10 +31,8 @@ export default function Header() {
                     <Image
                         src="/logo-main.png"
                         alt="PiN-Blog Logo"
-                        // Cung cấp kích thước gốc theo tỷ lệ 2:1 (ví dụ: 120x60)
                         width={120}
                         height={60}
-                        // h-10 cho mobile, md:h-12 cho desktop, w-auto để tự động co giãn theo chiều cao
                         className="object-contain h-14 w-auto md:h-18 drop-shadow-md"
                         priority
                     />
@@ -45,10 +50,18 @@ export default function Header() {
                         </Link>
                     ))}
                 </nav>
+                <div className="flex items-center gap-4 relative z-50">
+                    {isPortfolioPage && (
+                        <button
+                            onClick={toggleLang}
+                            className="flex items-center justify-center px-3 py-1.5 text-xs md:text-sm font-bold border border-accent text-accent rounded-full hover:bg-accent hover:text-black transition-all duration-300"
+                            title="Đổi ngôn ngữ / Change Language"
+                        >
+                            {lang === "en" ? "🇻🇳 VI" : "🇬🇧 EN"}
+                        </button>
+                    )}
 
-                {/* Right Side: Icons & CTA */}
-                <div className="flex items-center gap-5 relative z-50">
-                    <div className="hidden sm:flex items-center gap-5 text-muted-foreground">
+                    <div className="hidden sm:flex items-center gap-5 text-muted-foreground ml-2">
                         <a
                             href={`mailto:${CONTACT_INFO.email}`}
                             className="hover:text-accent hover:-translate-y-0.5 transition-all duration-300"
@@ -64,7 +77,6 @@ export default function Header() {
                         </div>
                     </div>
 
-                    {/* Nút Hamburger cho Mobile */}
                     <button
                         onClick={toggleMenu}
                         className="md:hidden p-1 text-accent hover:text-white transition-colors"
@@ -79,7 +91,6 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Mobile Navigation Dropdown */}
             <div
                 className={`md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-xl border-b border-border/40 overflow-hidden transition-all duration-300 ease-in-out ${
                     isMobileMenuOpen
@@ -88,7 +99,6 @@ export default function Header() {
                 }`}
             >
                 <nav className="flex flex-col items-center gap-6">
-                    {/* Render tự động Links cho Mobile */}
                     {NAV_LINKS.map((link) => (
                         <Link
                             key={link.href}
@@ -100,7 +110,6 @@ export default function Header() {
                         </Link>
                     ))}
 
-                    {/* Show contacts in mobile menu */}
                     <div className="flex gap-6 mt-2 text-muted-foreground sm:hidden">
                         <a
                             href={`mailto:${CONTACT_INFO.email}`}
