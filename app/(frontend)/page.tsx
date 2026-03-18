@@ -14,7 +14,6 @@ export default function HomePage() {
                 <p className="text-lg font-medium">Never stop, it is me !!!</p>
             </div>
 
-            {/* Video Box */}
             <div className="w-full max-w-3xl relative aspect-video bg-black/50 rounded-2xl overflow-hidden border-2 border-border shadow-lg flex items-center justify-center group cursor-pointer">
                 <h3 className="text-3xl font-bold z-10 text-center drop-shadow-md group-hover:scale-105 transition-transform">
                     Clip tự quay giới
@@ -23,11 +22,8 @@ export default function HomePage() {
                 </h3>
                 <div className="absolute inset-0 bg-primary/30 group-hover:bg-primary/10 transition-colors"></div>
             </div>
-
-            {/* Navigation Cards */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 w-full mt-10 pb-12 items-start">
                 {HOME_CARDS.map((card, index) => {
-                    // Logic tạo hiệu ứng so le: Các thẻ ở vị trí lẻ (1, 3) sẽ bị đẩy xuống
                     const isOdd = index % 2 !== 0;
                     const transformClass = isOdd
                         ? "transform translate-y-8 md:translate-y-12"
@@ -72,7 +68,6 @@ function NavCard({
             } ${className}`}
             onClick={(e) => disabled && e.preventDefault()}
         >
-            {/* Background Image Container */}
             <div className="absolute inset-0 aspect-2/3 group-hover:scale-110 transition-transform duration-500">
                 <Image
                     src={image}
@@ -82,8 +77,6 @@ function NavCard({
                     sizes="(max-width: 768px) 50vw, 20vw"
                 />
             </div>
-
-            {/* Lớp phủ làm tối ảnh để chữ nổi bật hơn */}
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"></div>
 
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center z-10">
